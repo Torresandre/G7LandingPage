@@ -1,77 +1,99 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
-import { useFormik } from 'formik';
+import { Formik, Field, Form, ErrorMessage } from 'formik';
+import schema from './schema';
+import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
 
-const validate = values => {
-  const errors = {};
 
-  if (!values.firstName) {
-    errors.firstName = 'Required';
-  } else if (values.firstName.length > 15) {
-    errors.firstName = 'Must be 15 characters or less';
+const useStyles = makeStyles((theme) => ({
+  root: {
+        display: 'grid',
+        justifyContent: 'center',
+        alignItems: 'center', 
+        
+        minHeight: '80vh',
+        fontFamily: 'Nunito', 
+        width: '100%',
+        background: '#002336',
+        padding: '2rem',
+        borderRadius: '10px',
+       
+    
+  },
+  nome: {
+    display: 'flex',
+    alignItems: 'top',
+  },
+  divEmail: {
+    display: 'grid',
+    padding: '12px',
+  },
+  divForm: {
+    padding: '12px',
+    alignItems: 'center',
+    display: 'grid',
+    flexDirection: 'collumn',
+    justifyContent: 'center',
+  },
+  Form: {
+    width: '80%',
+    alignItems: 'center',
+    justifyContent: 'center',
+  }
+  
+}));
+
+
+function FormLanding() {
+
+  const classes = useStyles();
+  function onSubmit(values, actions) {
+    console.log('SUBMIT', values);
   }
 
-  if (!values.lastName) {
-    errors.lastName = 'Required';
-  } else if (values.lastName.length > 20) {
-    errors.lastName = 'Must be 20 characters or less';
-  }
-
-  if (!values.email) {
-    errors.email = 'Required';
-  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-    errors.email = 'Invalid email address';
-  }
-
-  return errors;
-};
-
- function SignupForm() {
-    const formik = useFormik({
-        initialValues: {
-            firstName: '',
-            lastName: '',
-            email: '',
-        },
-        validate,
-        onSubmit: values => {
-            alert(JSON.stringify(values, null, 2));
-        },
-    });
-    return (
-        <form onSubmit={formik.handleSubmit}>
-            <label htmlFor="firstName">First Name</label>
-            <input
-                id="firstName"
-                name="firstName"
-                type="text"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.firstName} />
-            {formik.errors.firstName ? <div>{formik.errors.firstName}</div> : null}
-
-            <label htmlFor="lastName">Last Name</label>
-            <input
-                id="lastName"
-                name="lastName"
-                type="text"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.lastName} />
-            {formik.errors.lastName ? <div>{formik.errors.lastName}</div> : null}
-
-            <label htmlFor="email">Email Address</label>
-            <input
-                id="email"
-                name="email"
-                type="email"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.email} />
-            {formik.errors.email ? <div>{formik.errors.email}</div> : null}
-
-            <button type="submit">Submit</button>
-        </form>
-    );
+  return (
+    <div className={classes.root}>
+      <Formik
+        validationSchema={schema}
+        onSubmit={onSubmit}
+        validateOnMount
+        initialValues={{
+          name: '',
+          lastName: '',
+          email: '',
+        }}
+        render={({ values, errors, touched, isValid }) => (
+          <Form className={classes.Form}>
+            <div className={classes.nome}>
+            <div className={classes.divForm}>
+              <label>Nome:</label>
+              <Field name="name" type="text" className={classes.field} variant="outlined" />
+              <ErrorMessage name="name" />
+            </div>
+            <div className={classes.divForm}>
+              <label>Sobrenome:</label>
+              <Field name="lastName" type="text" className={classes.field} variant="outlined" />
+              <ErrorMessage name="lastName" />
+            </div>
+          </div>
+          <div className={classes.divEmail}>
+              <label>Email:</label>
+              <Field name="email" type="email" className={classes.fieldEmail} variant="outlined" />
+              <ErrorMessage name="email" />
+            </div>
+            <Button color="primary" variant="outlined" disabled={!isValid} fullWidth type="submit">
+            Receber Material
+        </Button>
+            
+            </Form>
+             
+         
+          
+        )}
+      />
+    </div>
+  );
 }
 
-export default SignupForm;
+export default FormLanding;

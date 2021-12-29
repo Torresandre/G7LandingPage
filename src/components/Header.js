@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { AppBar, IconButton, Toolbar, Collapse } from '@material-ui/core';
+import {  IconButton, Collapse } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { Link as Scroll } from 'react-scroll';
-import SimpleMenu from './Menu';
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -76,17 +76,7 @@ export default function Header() {
     <div className={classes.rotate} >
     <div className={classes.root} id="header">
       
-      <AppBar className={classes.appbar} elevation={0}>
-        <Toolbar className={classes.appbarWrapper}>
-          <h1 className={classes.appbarTitle}>
-            G<span className={classes.colorText}>7</span>
-          </h1>
-          <IconButton>
-            <SimpleMenu />
-            
-          </IconButton>
-        </Toolbar>
-      </AppBar>
+      
 
       <Collapse
         in={checked}

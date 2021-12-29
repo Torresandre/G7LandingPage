@@ -57,7 +57,7 @@ export default function SimpleMenu() {
       
         <MenuItem onClick={handleClose}>Portifólio</MenuItem>
         
-        <Scroll to="SignupForm" smooth={true}>
+        <Scroll to="contact" smooth={true}>
         <MenuItem onClick={handleClose}>Contato</MenuItem>
         </Scroll>
       </Menu>

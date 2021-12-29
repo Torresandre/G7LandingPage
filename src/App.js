@@ -4,7 +4,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import { CssBaseline } from '@material-ui/core';
 import Header from './components/Header';
 import PlaceToVisit from './components/PlaceToVisit';
-import SignupForm from './components/form2'
+import Contact from './components/contact';
+import BarMenu from './components/barMenu';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -25,10 +27,11 @@ export default function App() {
   const classes = useStyles();
   return (
     <div className={classes.root}>
+      <BarMenu/>
       <CssBaseline />
       <Header />
       <PlaceToVisit />
-      <SignupForm/>
+      <Contact/>
     </div>
   );
 }

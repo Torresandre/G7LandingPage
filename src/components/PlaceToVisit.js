@@ -3,6 +3,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import ImageCard from './ImageCard';
 import places from '../static/places';
 import useWindowPosition from '../hook/useWindowPosition';
+
+
 const useStyles = makeStyles((theme) => ({
   root: {
     background:'#002336',
